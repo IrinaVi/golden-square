@@ -5,7 +5,6 @@ class Counter
 
     def add(num)
         @count += num
-        @count += 1
     end
 
     def report
