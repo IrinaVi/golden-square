@@ -23,13 +23,13 @@ class DiaryEntry
 
   def reading_chunk(wpm, minutes)
     chunk_length = wpm * minutes
-    puts "Current furthest word #{@furthest_word_read}. count words: #{chunk_length}"
+    current_chunk_list = @contents.split(" ")
     if @furthest_word_read >= count_words
       @furthest_word_read = 0
-    else
-      current_chunk = @contents.split(" ").slice(@furthest_word_read, chunk_length+@furthest_word_read).join(" ")
-      @furthest_word_read = chunk_length
-      current_chunk
     end
+    current_chunk = current_chunk_list[@furthest_word_read, chunk_length].join(" ")
+    puts "Current furthest word #{@furthest_word_read}. chuck length #{chunk_length}, current chunk: #{current_chunk}"
+    @furthest_word_read = chunk_length+@furthest_word_read
+    return current_chunk
   end
 end
