@@ -10,27 +10,17 @@ class TodoList
     end
   
     def incomplete
-        for task in @all_todos
-            unless task.done?
-                @incomplete << task.task
-            end
-        end
+        @all_todos.each {|task| @incomplete << task.task unless task.done?}
         @incomplete
     end
   
     def complete
-        for todo in @all_todos
-            if todo.done?
-                @complete << todo.task
-            end
-        end
+        @all_todos.each {|task| @complete << task.task if task.done?}
         @complete
     end
   
     def give_up!
-        @all_todos.each do |todo|
-            @complete << todo.task
-        end
+        @all_todos.each {|todo| @complete << todo.task}
         @complete
   end
 end
