@@ -12,7 +12,7 @@ RSpec.describe do
         expect(diary_entry.count_words).to eq 3
     end
 
-    it "returns 1 minute for the contents" do
+    it "returns 3 minutes reading time for the contents" do
         diary_entry = DiaryEntry.new("Today", "Julien was jumping like crazy and then was asking for tasty food")
         expect(diary_entry.reading_time(5)).to eq 3
     end

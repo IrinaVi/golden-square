@@ -28,4 +28,23 @@ RSpec.describe Todo do
         todo = Todo.new
         expect{todo.print_todos}.to raise_error "Your todo list is empty"
     end
+
+    context "testing delete functionality" do
+        todo = Todo.new
+
+        it "removes one todo when we call the delete function" do
+            todo.add("Clean the dishes")
+            todo.add("Hoover")
+            todo.delete("Clean the dishes")
+            expect(todo.print_todos).to eq "Hoover"
+        end
+
+        it "fails when a todo does not exist" do
+            expect{todo.delete("Feed the cat")}.to raise_error "There is no such a task in the list!"
+        end
+
+        it "fails when a todo does not exist" do
+            expect{todo.delete("")}.to raise_error "There is no such a task in the list!"
+        end
+    end
 end

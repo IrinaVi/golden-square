@@ -3,5 +3,5 @@ def get_most_common_letter(text)
     text.chars.each do |char|
       counter[char] += 1 if char != " "
     end
-    counter.to_a.sort_by { |k, v| -v }[0][0]
+    counter.sort_by { |k, v| -v }[0][0]
   end

@@ -1,35 +1,33 @@
 class Diary
     def initialize
-        @all_entires = []
-        @entries_length = Hash.new(0)
+        @all_enteries = []
     end
   
     def add(entry)
-        @all_entires << entry
+        @all_enteries << entry
     end
   
     def all
-      @all_entires
+        @all_enteries
     end
   
     def count_words
-        @all_entires.each do |entry| 
-            @entries_length[entry.contents] += entry.count_words
-        end
-        @entries_length
+        total = 0
+        @all_enteries.each {|one_entry| total+=one_entry.count_words}
+        return total
     end
   
     def reading_time(wpm) 
-        total = 0
-        @all_entires.each do |entry|
-            total += entry.count_words
-        end
-        total
+        (count_words.to_f/wpm).ceil
     end
   
     def find_best_entry_for_reading_time(wpm, minutes)
-        chunk = wpm * minutes
-        selected = @entries_length.select {|key,value| value <= chunk}
-        sorted_entries = selected.sort {|key, value| value}
+        #here we take all entries, loop through them, check reading time for each of them, keep items that are within reading times
+        #return the first item
+        readable_entries = @all_enteries.filter do |entry|
+            entry.reading_time(wpm) <= minutes
+        end
+        sorted_by_longest = readable_entries.sort_by {|entry| entry.reading_time(wpm) }
+        return sorted_by_longest[-1]
     end
-  end
+end
